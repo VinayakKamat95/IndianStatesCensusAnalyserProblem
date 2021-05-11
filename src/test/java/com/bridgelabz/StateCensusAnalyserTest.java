@@ -59,6 +59,17 @@ public class StateCensusAnalyserTest {
 
         }
     }
+
+    @Test
+    public void whenCorrectCensusCSVFile_ButHeaderIncorrect_ShouldReturnFalse() {
+        StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+        try {
+            stateCensusAnalyser.loadCsvData(STATECENSUS_CSVFILE, StateCensus.class);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+            Assert.assertEquals(CensusAnalyserException.CensusExceptionType.INCORRECT_DATA_ISSUE, e.type);
+        }
+    }
 }
 
 

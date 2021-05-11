@@ -40,12 +40,23 @@ public class StateCensusAnalyserTest {
     @Test
     public void GivenTheStateCensusCsvFile_WhenCorrect_ButFileExtensionIncorrect_ShouldThrowCensusAnalyserException() {
         StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-
         try {
             stateCensusAnalyser.loadCsvData(STATECODES_CSVFILE, StateCensus.class);
         } catch (CensusAnalyserException e) {
             e.printStackTrace();
             Assert.assertEquals(CensusAnalyserException.CensusExceptionType.INCORRECT_DATA_ISSUE, e.type);
+        }
+    }
+
+    @Test
+    public void GivenTheStateCensusCSVFile_WhenCorrect_ButDelimiterIncorrect_ReturnsCensusAnalyserException() {
+        StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+        try {
+            stateCensusAnalyser.loadCsvData(STATECENSUS_CSVFILE, StateCensus.class);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+            Assert.assertEquals(CensusAnalyserException.CensusExceptionType.INCORRECT_DATA_ISSUE, e.type);
+
         }
     }
 }

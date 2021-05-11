@@ -3,6 +3,8 @@ package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
+
 
 public class StateCensusAnalyserTest {
 
@@ -23,6 +25,19 @@ public class StateCensusAnalyserTest {
         }
     }
 
+    @Test
+    public void GivenTheStateCensusCsvFile_IfDoesntExist_ShouldThrowCensusAnalyserException() {
+        StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+
+        try {
+            stateCensusAnalyser.openCsvBuilder(WRONG_FILE, StateCensus.class);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+            Assert.assertEquals(CensusAnalyserException.CensusExceptionType.NO_SUCH_FILE, e.type);
+        }
+
+    }
+    
 }
 
 

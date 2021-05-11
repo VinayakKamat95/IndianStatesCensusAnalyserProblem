@@ -30,14 +30,24 @@ public class StateCensusAnalyserTest {
         StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
 
         try {
-            stateCensusAnalyser.openCsvBuilder(WRONG_FILE, StateCensus.class);
+            stateCensusAnalyser.loadCsvData(WRONG_FILE, StateCensus.class);
         } catch (CensusAnalyserException e) {
             e.printStackTrace();
             Assert.assertEquals(CensusAnalyserException.CensusExceptionType.NO_SUCH_FILE, e.type);
         }
-
     }
-    
+
+    @Test
+    public void GivenTheStateCensusCsvFile_WhenCorrect_ButFileExtensionIncorrect_ShouldThrowCensusAnalyserException() {
+        StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+
+        try {
+            stateCensusAnalyser.loadCsvData(STATECODES_CSVFILE, StateCensus.class);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+            Assert.assertEquals(CensusAnalyserException.CensusExceptionType.INCORRECT_DATA_ISSUE, e.type);
+        }
+    }
 }
 
 

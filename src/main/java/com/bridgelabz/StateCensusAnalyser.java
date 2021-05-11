@@ -14,6 +14,24 @@ public class StateCensusAnalyser {
     public StateCensusAnalyser() {
     }
 
+    public int openCsvBuilder(String csvFilePath, Object myClass) throws CensusAnalyserException {
+        int counter = 0;
+        try {
+            Iterator<Object> myIterator = getIterator(csvFilePath, myClass);
+            while ( myIterator.hasNext() ) {
+                counter++;
+                Object myObj = myIterator.next();
+                //System.out.println(myObj.toString());
+            }
+        } catch (CensusAnalyserException e){
+            throw e;
+        } catch (RuntimeException e){
+            throw new CensusAnalyserException(CensusAnalyserException.CensusExceptionType.INCORRECT_DATA_ISSUE,
+                    "might be some error related to delimiter at record no. : " +(counter+1));
+        }
+        return counter;
+    }
+
     public int loadCsvData(String csvFilePath, Object myClass) throws CensusAnalyserException {
         int counter = 0;
         try {

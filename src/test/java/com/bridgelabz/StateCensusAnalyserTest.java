@@ -76,6 +76,7 @@ public class StateCensusAnalyserTest {
         try {
             int count = stateCensusAnalyser.loadCsvData(STATECODES_CSVFILE, StateCode.class);
             System.out.println(count);
+            Assert.assertEquals(37,count);
         } catch (CensusAnalyserException e) {
             e.printStackTrace();
         }

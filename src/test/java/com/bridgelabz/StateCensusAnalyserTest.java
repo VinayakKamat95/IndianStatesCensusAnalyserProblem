@@ -81,6 +81,18 @@ public class StateCensusAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void GivenTheStateCodeCsvFile_IfDoesntExist_ShouldThrowCensusAnalyserException() {
+        StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+
+        try {
+            stateCensusAnalyser.loadCsvData(WRONG_FILE, StateCode.class);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+            Assert.assertEquals(CensusAnalyserException.CensusExceptionType.NO_SUCH_FILE, e.type);
+        }
+    }
 }
 
 
